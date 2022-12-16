@@ -1,4 +1,4 @@
-const dataLocation = "https://raw.githubusercontent.com/hargbholarhan/testData/main/detected-trafficking.csv";
+const dataLocation = "https://raw.githubusercontent.com/keiyafa/traffick_data_viz/main/detected-trafficking.csv";
 
 export function map(el) {
   const width = 500;
@@ -22,7 +22,7 @@ export function map(el) {
     .range(d3.schemeBuGn[7]);
 
   d3.queue()
-    .defer(d3.json, "https://raw.githubusercontent.com/hargbholarhan/testData/main/world.geojson")
+    .defer(d3.json, "https://raw.githubusercontent.com/keiyafa/traffick_data_viz/main/world.geojson")
     .defer(d3.csv, dataLocation, function(d) { data.set(d.Country, +d[2017])})
     .await(ready);
 
