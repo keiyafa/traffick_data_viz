@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+  
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://d3js.org/topojson.v2.min.js"></script>
+  <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  
+  <link href="./styles.css" rel="stylesheet" />
+
+  <title>Human Trafficking</title>
+  <style>
+    body {
+        font: 10px sans-serif;
+        color: #4169E1;
+        background-color:rgb(26, 25, 25)
+
+    }
+    select {
+        display: block;
+    }
+    .float-container {
+    
+    padding: 20px;
+  }
+
+  .float-child {
+      width: 45%;
+      float: left;
+      padding: 20px;
+      
+  } 
+    
+    </style>
+</head>
+<body>
+  <div class="float-container">
+    <div class="float-child">
+      <h1>Map</h1>
+      <div id="map"></div>
+    </div>
+    <div class="float-child">
+        <h1>Top 10 2017</h1>
+        <div id="bargraph"></div>
+    </div>
+    
+  </div>
+
+<div>
+  <h1>Timeseries</h1>
+  <div id='vis-container'></div>
+</div>
+<h1>Trend</h1>
+<div id="trendgraph"></div>
+</body>
+<script type="module">
+  import { map, bargraph, trendgraph, timeserie } from './index.js';
+
+  window.onload = function () {
+    bargraph("#bargraph");
+    trendgraph("#trendgraph"),
+    map("#map");
+    timeserie()
+  }
+</script>
