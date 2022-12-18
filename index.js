@@ -85,7 +85,7 @@ export function trendgraph(el) {
         sum: d3.sum(data.map(function(d){ return d[date]}))
       }
     })
-    //color
+    
     var color = d3.scaleOrdinal([`#DE3163`, `#584c77`,`#6495ED`, `#33431e`, `#a36629`, `#92462f`,`#9FE2BF`, `#b63e36`, `#b74a70`,`#CCCCFF`, `#946943`,`#8B0000`,`#383857`,`#DE3163`,`#EE82EE`]);
     const x = d3.scaleBand()
       .range([ 0, width ])
@@ -116,11 +116,11 @@ export function trendgraph(el) {
         .attr("fill", function(d,i) {
           return color(i);
         })
-        //no bar at the begining thus
+        
         .attr("height", function(d) { return height - y(0); })
         .attr("y", function(d) { return y(d.sum); })
 
-      //Animation
+      
       svg.selectAll("rect")
         .transition()
         .duration(2000)
@@ -148,7 +148,7 @@ export function bargraph(el) {
       return d3.descending(+a[2017], +b[2017]);
     }).slice(0, 10);
 
-    //color
+    
     var color = d3.scaleOrdinal([`#383867`, `#584c77`, `#33431e`, `#a36629`, `#92462f`, `#b63e36`, `#b74a70`, `#946943`,`#383857`,`#DE3163`]);
     const x = d3.scaleBand()
       .range([ 0, width ])
@@ -179,11 +179,11 @@ export function bargraph(el) {
         .attr("fill", function(d,i) {
           return color(i);
         })
-        //no bar at the begining thus:
+        
         .attr("height", function(d) { return height - y(0); })
         .attr("y", function(d) { return y(d[2017]); })
 
-    //Animation
+    
     svg.selectAll("rect")
     .transition()
     .duration(2000)
@@ -194,7 +194,7 @@ export function bargraph(el) {
 }
 
 export function timeserie() {
-  // Load and munge data, then make the visualization.
+ 
   
   var yearFields = [2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017];
 
@@ -204,7 +204,7 @@ export function timeserie() {
       var countryy = d.Country;
       countryMap[countryy] = [];
 
-      // { cerealName: [ bar1Val, bar2Val, ... ] }
+      
       yearFields.forEach(function(field) {
           countryMap[countryy].push( +d[field] );
       });
@@ -213,23 +213,23 @@ export function timeserie() {
   });
 
   var makeVis = function(countryMap) {
-  // Define dimensions of vis
+  
   var margin = { top: 30, right: 50, bottom: 70, left: 50 },
       width  = 700 - margin.left - margin.right,
       height = 400 - margin.top  - margin.bottom;
 
-  // Make x scale
+  
   var xScale = d3.scaleBand()
       .domain(yearFields)
       .range([0, width], 0.1)
       .padding(0.2);
 
-  // Make y scale, the domain will be defined on bar update
+  
   var yScale = d3.scaleLinear()
       .domain([0,2000])
       .range([height, 0]);
 
-  // Create canvas
+  
   var canvas = d3.select("#vis-container")
       .append("svg")
       .attr("width",  width  + margin.left + margin.right)
@@ -237,7 +237,7 @@ export function timeserie() {
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  // Make x-axis and add to canvas
+  
   var xAxis = d3.axisBottom(xScale)
 
   canvas.append("g")
@@ -249,7 +249,7 @@ export function timeserie() {
           .style("text-anchor", "end")
           .style("fill","white");
 
-  // Make y-axis and add to canvas
+  
   var yAxis = d3.axisLeft(yScale)
 
   var yAxisHandleForUpdate = canvas.append("g")
@@ -266,13 +266,13 @@ export function timeserie() {
       
 
   var updateBars = function(data) {
-      // First update the y-axis domain to match data
+      
       yScale.domain( d3.extent(data) );
       yAxisHandleForUpdate.call(yAxis);
 
       var bars = canvas.selectAll(".bar").data(data);
 
-      // Add bars for new data
+      
       bars.enter()
           .append("rect")
           .attr("class", "bar")
@@ -282,17 +282,17 @@ export function timeserie() {
           .attr("y", function(d,i) { return yScale(d); })
           .attr("height", function(d,i) { return height - yScale(d); });
 
-      // Update old ones, already have x / width from before
+      
       bars
           .transition().duration(1500)
           .attr("y", function(d,i) { return yScale(d); })
           .attr("height", function(d,i) { return height - yScale(d); });
 
-      // Remove old ones
+      
       bars.exit().remove();
   };
 
-  // Handler for dropdown value change
+  
   var dropdownChange = function() {
       var newCereal = d3.select(this).property('value'),
           newData   = countryMap[newCereal];
@@ -300,7 +300,7 @@ export function timeserie() {
       updateBars(newData);
   };
 
-  // Get names of cereals, for dropdown
+  
   var cereals = Object.keys(countryMap).sort();
 
   var dropdown = d3.select("#vis-container")
