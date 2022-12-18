@@ -67,7 +67,7 @@ export function map(el) {
 export function trendgraph(el) {
   const margin = {top: 30, right: 30, bottom: 70, left: 60},
       width = 1200 - margin.left - margin.right,
-      height = 600 - margin.top - margin.bottom;
+      height = 700 - margin.top - margin.bottom;
 
   const svg = d3.select(el)
     .append("svg")
