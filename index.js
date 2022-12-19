@@ -158,7 +158,7 @@ export function trendgraph(el) {
       .attr("d", valueline(sum))
       .attr("fill", "none")
       .attr("stroke", "#69b3a2")
-      .attr("stroke-width", 1.5);
+      .attr("stroke-width", 6.5);
   })
 }
 
